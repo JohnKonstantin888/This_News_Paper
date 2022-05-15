@@ -1,0 +1,59 @@
+1.User.objects.create_user(username='Konstantin')
+  User.objects.create_user(username='Svetlana')
+
+2.u1 = User.objects.create_user(username='Sergey')
+  u2 = User.objects.create_user(username='Tatyana')
+  Author.objects.create(authorUser=u1)
+  Author.objects.create(authorUser=u2)
+
+3.Category.objects.create(name='Art')
+  Category.objects.create(name='Sciece')
+  Category.objects.create(name='Movie')
+  Category.objects.create(name='Fun')
+
+4.author = Author.objects.get(id=1)
+  author1 = Author.objects.get(id=2)
+  Post.objects.create(author=author, categoryType='NW', title='Fun_title', text='Something_funny')
+  Post.objects.create(author=author1, categoryType='AR', title='First_article', text='This text first article')
+  Post.objects.create(author=author, categoryType='AR', title='Second_article', text='This text second article')
+
+5.Post.objects.get(id=1).postCategory.add(Category.objects.get(id=4))
+  Post.objects.get(id=2).postCategory.add(Category.objects.get(id=2)) 
+  Post.objects.get(id=3).postCategory.add(Category.objects.get(id=2)) 
+  Post.objects.get(id=3).postCategory.add(Category.objects.get(id=3))
+
+6.a)Comment.objects.create(commentPost=Post.objects.get(id=1), commentUser=Author.objects.get(id=1).authorUser,
+    text='My_comment')
+  b)Comment.objects.create(commentPost=Post.objects.get(id=1), commentUser=Author.objects.get(id=2).authorUser,
+    text='Once_My_comment')
+  c)Comment.objects.create(commentPost=Post.objects.get(id=2), commentUser=Author.objects.get(id=1).authorUser,
+    text='This_Once_My_comment')
+  d)Comment.objects.create(commentPost=Post.objects.get(id=3), commentUser=Author.objects.get(id=1).authorUser,
+    text='This_Fun_Once_My_comment')
+
+7.Comment.objects.get(id=1).like()
+  Comment.objects.get(id=1).dislike()
+  Post.objects.get(id=3).like() 
+  Post.objects.get(id=3).dislike()
+
+8.a = Author.objects.get(id=1)
+  a.update_rating()
+
+9.c = Author.objects.order_by('-ratingAuthor')[:1]
+  for i in c:
+	i.ratingAuthor
+	i.authorUser.username
+
+10.Post.objects.get(id=1).dateCreation
+   Post.objects.get(id=1).author.authorUser.username
+   Post.objects.get(id=1).rating
+   Post.objects.get(id=1).title
+   Post.objects.get(id=1).preview()
+   
+11.d = Post.objects.get(id=1)
+   d.dateCreation
+   d.author.authorUser.username
+   d.rating
+   d.text
+
+
